@@ -5,9 +5,9 @@ import android.content.SharedPreferences
 
 class PrefrenceDataStore (context : Context) {
 
-    private val PREFS_NAME = "PREFS_NAME"
+    private val PREFS_NAME = "sharedpref12345"
     private var sharedPref : SharedPreferences
-    val editor : SharedPreferences.Editor
+    private val editor : SharedPreferences.Editor
 
     init {
         sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -24,11 +24,16 @@ class PrefrenceDataStore (context : Context) {
     }
 
     fun put(key : String, value : Boolean) {
-        editor.putString(key, null)
+        editor.putBoolean(key, value)
             .apply()
     }
 
-    fun getBoolean(key : String) : Boolean? {
+    fun getBoolean(key : String) : Boolean {
         return sharedPref.getBoolean(key, false)
+    }
+
+    fun clear() {
+        editor.clear()
+            .apply()
     }
 }
